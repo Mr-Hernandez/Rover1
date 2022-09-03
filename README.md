@@ -4,6 +4,6 @@ I learned the basics of driver development with tutorials and previous projects 
 Wrote some drivers to get a rover running and taking commands wirelessly. 
 Put together a prototype of the rover to see if receive and follow commands wirelessly (though power is still from usb for now).
 
-A very short video here shows it after recieving a wireless command to "navigate". I put a very simple algorithm for that, use sonic sensor to check of object is nearby, if yes, then turn, if not then drive forward. It's not quite there yet but the bones are all set up.
+A very short video here shows it after recieving a wireless command to "navigate". I put a very simple algorithm for that (RoverPrototype.c), use sonic sensor to check of object is nearby, if yes, then turn, if not then drive forward. It's not quite there yet but the bones are all set up.
 https://user-images.githubusercontent.com/64346135/188251362-eb3029d0-292e-473b-81ca-2807b02d660c.mp4
 
