@@ -214,14 +214,16 @@ typedef struct{
 	volatile uint32_t CNT;
 	volatile uint32_t PSC;
 	volatile uint32_t ARR;
-	volatile uint32_t RCR;
+	volatile uint32_t RCR; // not in tim2-5 but "reserved"
 	volatile uint32_t CCR1;
 	volatile uint32_t CCR2;
 	volatile uint32_t CCR3;
 	volatile uint32_t CCR4;
-	volatile uint32_t BDTR;
+	volatile uint32_t BDTR; // not in tim2-5 but "reserved"
 	volatile uint32_t DCR;
 	volatile uint32_t DMAR;
+	volatile uint32_t OR;						// tim2_OR register
+							// tim5_OR register
 }TIM_RegDef_t;
 
 // NVIC Register Definition
@@ -722,6 +724,8 @@ typedef struct{
 #define TIM_CCER_CC3NP					11
 #define TIM_CCER_CC4E					12
 #define TIM_CCER_CC4P					13
+//#define TIM_CCER_CC4NE					14
+#define TIM_CCER_CC4NP					15
 
 /*
  * Bit position definitions for TIMx_EGR
@@ -747,6 +751,12 @@ typedef struct{
 #define TIM_BDTR_AOE					14
 #define TIM_BDTR_MOE					15
 
+/*
+ * Bit position definitions for TIMx_OR
+ */
+#define TIM_OR_ITR1RMP					10
+#define TIM_OR_TI4RMP					6
+#define TIM_OR_TI1RMP					0
 
 
 
