@@ -161,6 +161,49 @@ void PWM_init2(TIM_Handle_t* pTIM_Handle)
 
 }
 
+void inputCapture_init(TIM_Handle_t* pTIM_Handle)
+{
+	// Enables TIMx which it reads from pTIM_Handle
+	TIMX_PCLK_EN(pTIM_Handle);
+
+	pTIM_Handle->pTIMx->CCMR1 |= (1 << TIM_CCMR1_CC1S);
+//	pTIM_Handle->pTIMx->CCER |= (0x3 << TIM_CCER_CC1P); // now detects rising and falling (only one per trigger)
+	pTIM_Handle->pTIMx->CCER |= (1 << TIM_CCER_CC1E);
+	pTIM_Handle->pTIMx->PSC |= (uint16_t)159;
+	pTIM_Handle->pTIMx->CR1 |= (ENABLE << TIM_CR1_CEN);
+
+
+
+//	// Set CCMR1's CCR1 to 01 in order to tie CC1S to TI1 (CCR1 becomes read only)
+//	pTIM_Handle->pTIMx->CCMR2 &= ~(0x3 << TIM_CCMR2_CC4S); // clear bits
+//	pTIM_Handle->pTIMx->CCMR2 |= (0x1 << TIM_CCMR2_CC4S);
+//
+//	// Frequency used to sample TI1 input and length of digital filter
+//	pTIM_Handle->pTIMx->CCMR2 &= ~(0xF << TIM_CCMR2_IC4F);  // no division, N=2
+//	pTIM_Handle->pTIMx->CCMR2 |= (0x3 << TIM_CCMR2_IC4F);  // no division, N=8
+//
+//	// Edge sampling type
+//	pTIM_Handle->pTIMx->CCER &= ~(1 << TIM_CCER_CC4P);
+////	pTIM_Handle->pTIMx->CCER &= ~(1 << TIM_CCER_CC4NE); // ?
+//	pTIM_Handle->pTIMx->CCER &= ~(1 << TIM_CCER_CC4NP);
+//
+//	// Prescaler (currently setting to capture on each valid transition, so prescaler will be disabled
+//	pTIM_Handle->pTIMx->CCMR2 &= ~(0x3 << TIM_CCMR2_IC4PSC);
+//
+//	// Enable capture from the counter into the capture register
+//	pTIM_Handle->pTIMx->CCER |= (1 << TIM_CCER_CC4E);
+//
+//	// TIM5 channel 4, connect to LSI clk
+//	pTIM_Handle->pTIMx->OR &= ~(3 << TIM_OR_TI4RMP);
+//	pTIM_Handle->pTIMx->OR |= (1 << TIM_OR_TI4RMP);
+
+//	// enable counter with CEN bit in CR1
+//	pTIM_Handle->pTIMx->CR1 |= (ENABLE << TIM_CR1_CEN);
+
+
+}
+
+
 
 void delay(void)
 {
