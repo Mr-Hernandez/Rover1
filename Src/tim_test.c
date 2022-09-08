@@ -16,22 +16,69 @@ void setDutyCycle(TIM_RegDef_t* TIMx, uint8_t l_channel, uint32_t l_dutycycle);
 void local_delay(void);
 // add movement functions like driveForward, driveBackwards, turnClockwise, turnCounterclockwise
 
+// rover layout
+
+/*
+ * ----sonic sensor----
+ * - 				  -
+ * -				  -
+ * -				  -
+ * -				  -				-------------------------
+ * -				  -				|						|
+ * leftM        rightM-				|						|
+ * - 				  -				|						|
+ * --------------------           sonic ---------------O-----
+ */
 int main(void)
 {
 	gpioMotorInit();
 	tmpInit();
+	setDutyCycle(TIM4, 0, 0);
+	setDutyCycle(TIM4, 1, 0);
+	setDutyCycle(TIM4, 2, 0);
+	setDutyCycle(TIM4, 3, 0);
+	local_delay();
 	while(1)
 	{
-		setDutyCycle(TIM4, 1, 0);
-		setDutyCycle(TIM4, 0, 80);
-		setDutyCycle(TIM4, 3, 0);
-		setDutyCycle(TIM4, 2, 80);
-		local_delay();
-		setDutyCycle(TIM4, 1, 80);
+//		setDutyCycle(TIM4, 0, 80); // rightM: forwards or counterclockwise
+//		setDutyCycle(TIM4, 1, 80); // rightM: backwards or clockwise
+//		setDutyCycle(TIM4, 2, 80); // leftM: backwards or clockwise
+//		setDutyCycle(TIM4, 3, 80); // leftM: forwards or counterclockwise
+
+		/* forward */
+		setDutyCycle(TIM4, 0, 99); // rightM: forwards or counterclockwise
+		setDutyCycle(TIM4, 1, 0); // rightM: backwards or clockwise
+		setDutyCycle(TIM4, 2, 0); // leftM: backwards or clockwise
+		setDutyCycle(TIM4, 3, 99); // leftM: forwards or counterclockwise
+		local_delay();local_delay();local_delay();local_delay();
+
+		/* backward */
+		setDutyCycle(TIM4, 0, 0); // rightM: forwards or counterclockwise
+		setDutyCycle(TIM4, 1, 80); // rightM: backwards or clockwise
+		setDutyCycle(TIM4, 2, 80); // leftM: backwards or clockwise
+		setDutyCycle(TIM4, 3, 0); // leftM: forwards or counterclockwise
+		local_delay();local_delay();local_delay();local_delay();local_delay();
+
+		/* turn right */
+		setDutyCycle(TIM4, 0, 0); // rightM: forwards or counterclockwise
+		setDutyCycle(TIM4, 1, 80); // rightM: backwards or clockwise
+		setDutyCycle(TIM4, 2, 0); // leftM: backwards or clockwise
+		setDutyCycle(TIM4, 3, 80); // leftM: forwards or counterclockwise
+		local_delay();local_delay();local_delay();local_delay();local_delay();
+
+		/* turn left */
+		setDutyCycle(TIM4, 0, 80); // rightM: forwards or counterclockwise
+		setDutyCycle(TIM4, 1, 0); // rightM: backwards or clockwise
+		setDutyCycle(TIM4, 2, 80); // leftM: backwards or clockwise
+		setDutyCycle(TIM4, 3, 0); // leftM: forwards or counterclockwise
+		local_delay();local_delay();local_delay();local_delay();local_delay();
+
 		setDutyCycle(TIM4, 0, 0);
-		setDutyCycle(TIM4, 3, 80);
+		setDutyCycle(TIM4, 1, 0);
 		setDutyCycle(TIM4, 2, 0);
-		local_delay();
+		setDutyCycle(TIM4, 3, 0);
+		local_delay();local_delay();local_delay();local_delay();local_delay();
+
 	}
 
 

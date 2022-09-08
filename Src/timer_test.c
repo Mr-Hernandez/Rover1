@@ -53,7 +53,7 @@ int main(void)
 
 		}
 		y = (uint16_t)TIM3->CCR1;
-		TIM3->SR = ~(1 << TIM_SR_CC1IF); // clear?
+		TIM3->SR = ~(1 << TIM_SR_CC1IF); // clear? seeems to be cleared by reading CCR1 anyways
 		if(x < y)
 		{
 			b = y - x;
