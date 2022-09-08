@@ -24,6 +24,13 @@ typedef struct
 
 }PWM_Config_t;
 
+//typedef struct
+//{
+//	uint8_t			TIM_Channel;
+//	uint8_t			TIM_EdgeDetection;
+//	uint8_t			TIM_FreqDivision;
+//}INPUTCAPTURE_Config_t;
+
 typedef struct
 {
 	TIM_RegDef_t* 	pTIMx;
@@ -82,6 +89,7 @@ typedef struct
  */
 void PWM_init(TIM_Handle_t* pTIM_Handle);
 void PWM_init2(TIM_Handle_t* pTIM_Handle);
+void inputCapture_init(TIM_Handle_t* pTIM_Handle);
 
 // Enable TIMx read in from the pTIM_Handle->pTIMx
 void TIMX_PCLK_EN(TIM_Handle_t* pTIM_Handle); // should this enable and disable?
